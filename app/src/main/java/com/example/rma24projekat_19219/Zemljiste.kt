@@ -5,6 +5,7 @@ enum class Zemljiste(val naziv: String) {
     GLINENO("Glinеno zemljište"),
     ILOVACA("Ilovača"),
     CRNICA("Crnica"),
-    SLJUNOVITO("Šljunovito zemljište"),
+    SLJUNKOVITO("Šljunovito zemljište"),
     KRECNJACKO("Krečnjačko zemljište");
+    
 }
