@@ -7,7 +7,4 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
-  <component name="TaskProjectConfiguration">
-    <server type="JIRA" url="https://bitbucket.org/etfmedin/rma24projekat-19219/src/main" />
-  </component>
 </project>
