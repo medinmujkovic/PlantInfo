@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">rma24projekat-19219</string>
+    <string name="selected_item">Selected item:</string>
+
+    <string-array name="Modovi">
+        <item>Medicinski mod</item>
+        <item>Kuharski mod</item>
+        <item>Botanički mod</item>
+    </string-array>
 </resources>
