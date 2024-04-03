@@ -1,14 +1,12 @@
 package com.example.rma24projekat_19219
 
 import android.content.Context
-import android.graphics.drawable.AnimatedImageDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
 
 class RecyclerViewAdapterBotanicki(private var biljke: List<Biljka>)
     : RecyclerView.Adapter<RecyclerViewAdapterBotanicki.ViewHolder>() {
@@ -22,10 +20,13 @@ class RecyclerViewAdapterBotanicki(private var biljke: List<Biljka>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.nazivItem.text = biljke[position].naziv;
         holder.porodicaItem.text = biljke[position].porodica;
+
         val klimatskiTipovi = biljke[position].klimatskiTipovi.joinToString(", ")
         holder.klimatskiTipItem.text = klimatskiTipovi
+
         val zemljisniTipovi = biljke[position].zemljisniTipovi.joinToString(", ")
         holder.zemljisniTipItem.text = zemljisniTipovi
+
         val porodica: String = biljke[position].porodica
         val context: Context = holder.slikaItem.context
 
