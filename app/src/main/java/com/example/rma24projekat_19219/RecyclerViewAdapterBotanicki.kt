@@ -32,7 +32,16 @@ class RecyclerViewAdapterBotanicki(private var biljke: List<Biljka>)
             .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
         holder.slikaItem.setImageResource(id)
 
-        holder.itemView.setOnClickListener{biljke[position].naziv}
+        holder.itemView.setOnClickListener {
+            val selectedBiljka = biljke.getOrNull(position) ?: return@setOnClickListener
+            val lista = biljke.filter { biljka ->
+                biljka.porodica == selectedBiljka.porodica &&
+                        biljka.klimatskiTipovi.containsAll(selectedBiljka.klimatskiTipovi) &&
+                        biljka.zemljisniTipovi.containsAll(selectedBiljka.zemljisniTipovi)
+            }
+            updateBiljke(lista)
+        }
+
     }
     fun updateBiljke (biljke: List<Biljka>) {
         this.biljke = biljke

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
@@ -53,10 +52,30 @@ class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
         if (id==0) id=context.resources
             .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
         holder.slikaItem.setImageResource(id)
+
         holder.itemView.setOnClickListener {
-            val clickedBiljka = biljke[position]
-            Toast.makeText(holder.itemView.context, "Clicked: ${clickedBiljka.naziv}", Toast.LENGTH_SHORT).show()
+            val lista = mutableListOf<Biljka>()
+            val selectedBiljka = biljke[position]
+
+            if (selectedBiljka == null) {
+                updateBiljke(biljke)
+                return@setOnClickListener
+            }
+
+            for (biljka in biljke) {
+                if (biljka.profilOkusa == selectedBiljka.profilOkusa) {
+                    val klimatskiMatches = biljka.klimatskiTipovi.containsAll(selectedBiljka.klimatskiTipovi)
+                    val zemljisniMatches = biljka.zemljisniTipovi.containsAll(selectedBiljka.zemljisniTipovi)
+
+                    if (klimatskiMatches && zemljisniMatches) {
+                        lista.add(biljka)
+                    }
+                }
+            }
+
+            updateBiljke(lista)
         }
+
     }
     fun updateBiljke (biljke: List<Biljka>) {
         this.biljke = biljke

@@ -24,7 +24,10 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) : Recycler
         holder.upozorenjeItem.text = currentBiljka.medicinskoUpozorenje
 
         val context: Context = holder.slikaItem.context
-        val id = context.resources.getIdentifier(currentBiljka.naziv, "drawable", context.packageName)
+        var id = context.resources.getIdentifier(currentBiljka.naziv, "drawable", context.packageName)
+        holder.slikaItem.setImageResource(id)
+        if (id==0) id=context.resources
+            .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
         holder.slikaItem.setImageResource(id)
 
 
@@ -35,23 +38,29 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) : Recycler
 
         holder.itemView.setOnClickListener{
             val lista= mutableListOf<Biljka>()
-            for(i in biljke)
-            {
-                if(i.porodica==biljke[position].porodica)
-                {
-                    var KlimTip=false
-                    var ZemljTip=false
-                    for(j in i.klimatskiTipovi)
-                    {
-                        if(j in biljke[position].klimatskiTipovi)
-                        {
-                            KlimTip=true;
-                        }
-                    }
+            val selectedBiljka = biljke[position]
 
+            if (selectedBiljka == null) {
+                updateBiljke(biljke)
+                return@setOnClickListener
+            }
+
+            for (biljka in biljke) {
+                if (biljka.naziv == selectedBiljka.naziv) {
+                    val koristiList = biljka.medicinskeKoristi
+                    val koristMatches = koristiList.size == 3 &&
+                            koristiList[0].opis in selectedBiljka.medicinskeKoristi[0].opis &&
+                            koristiList[1].opis in selectedBiljka.medicinskeKoristi[1].opis &&
+                            koristiList[2].opis in selectedBiljka.medicinskeKoristi[2].opis
+
+                    if (koristMatches) {
+                        lista.add(biljka)
+                    }
                 }
             }
+            updateBiljke(lista)
         }
+
     }
 
 

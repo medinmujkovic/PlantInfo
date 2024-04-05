@@ -6,6 +6,5 @@ enum class MedicinskaKorist(val opis: String) {
     PROTIVBOLOVA("Protivbolova - za smanjenje bolova"),
     REGULACIJAPRITISKA("Regulacija pritiska - za regulaciju visokog/niskog pritiska"),
     REGULACIJAPROBAVE("Regulacija probave"),
-    PODRSKAIMUNITETU("Podrška imunitetu"),
-    IMMUNOSUPORT ("Podrška imunitetu")
+    PODRSKAIMUNITETU("Podrška imunitetu")
 }
