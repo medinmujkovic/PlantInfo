@@ -5,11 +5,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.contrib.RecyclerViewActions
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +21,14 @@ class MainActivity : AppCompatActivity() {
 
         val mods = resources.getStringArray(R.array.Modovi)
         val spinner = findViewById<Spinner>(R.id.modSpinner)
+        val recyclerView = findViewById<RecyclerView>(R.id.biljkeRV)
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter=RecyclerViewAdapterMedicinski(biljke);
+        recyclerView.scrollToPosition(R.id.biljkeRV);
+
+
+
         if (spinner != null) {
             val adapter = ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, mods)
@@ -28,13 +38,15 @@ class MainActivity : AppCompatActivity() {
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>,
                                             view: View, position: Int, id: Long) {
-                    Toast.makeText(this@MainActivity,
-                        getString(R.string.selected_item) + " " +
-                                "" + mods[position], Toast.LENGTH_SHORT).show()
+                    when (position) {
+                        0 -> recyclerView.adapter = RecyclerViewAdapterMedicinski(biljke)
+                        1 -> recyclerView.adapter = RecyclerViewAdapterKuharski(biljke)
+                        2 -> recyclerView.adapter = RecyclerViewAdapterBotanicki(biljke)
+                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
-                    // write code to perform some action
+
                 }
             }
         }

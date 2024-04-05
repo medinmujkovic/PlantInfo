@@ -8,41 +8,58 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>)
-    : RecyclerView.Adapter<RecyclerViewAdapterMedicinski.ViewHolder>() {
+class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) : RecyclerView.Adapter<RecyclerViewAdapterMedicinski.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.medicinski_mod, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.medicinski_mod, parent, false)
         return ViewHolder(view)
     }
+
     override fun getItemCount(): Int = biljke.size
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.nazivItem.text = biljke[position].naziv;
-        holder.upozorenjeItem.text = biljke[position].medicinskoUpozorenje;
+        val currentBiljka = biljke[position]
 
-        val korist1Item = biljke[position].medicinskeKoristi[0]
-        holder.korist1Item.text = korist1Item.toString()
 
-        val korist2Item = biljke[position].medicinskeKoristi[1]
-        holder.korist2Item.text = korist2Item.toString()
+        holder.nazivItem.text = currentBiljka.naziv
+        holder.upozorenjeItem.text = currentBiljka.medicinskoUpozorenje
 
-        val korist3Item = biljke[position].medicinskeKoristi[2]
-        holder.korist3Item.text = korist3Item.toString()
-
-        val nazivItem: String = biljke[position].naziv
         val context: Context = holder.slikaItem.context
-
-        var id: Int = context.resources
-            .getIdentifier(nazivItem, "drawable", context.packageName)
-        if (id==0) id=context.resources
-            .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
+        val id = context.resources.getIdentifier(currentBiljka.naziv, "drawable", context.packageName)
         holder.slikaItem.setImageResource(id)
+
+
+        val koristiList = currentBiljka.medicinskeKoristi
+        holder.korist1Item.text = (koristiList.getOrNull(0) ?.opis?: "")
+        holder.korist2Item.text = (koristiList.getOrNull(1) ?.opis?: "")
+        holder.korist3Item.text = (koristiList.getOrNull(2) ?.opis?: "")
+
+        holder.itemView.setOnClickListener{
+            val lista= mutableListOf<Biljka>()
+            for(i in biljke)
+            {
+                if(i.porodica==biljke[position].porodica)
+                {
+                    var KlimTip=false
+                    var ZemljTip=false
+                    for(j in i.klimatskiTipovi)
+                    {
+                        if(j in biljke[position].klimatskiTipovi)
+                        {
+                            KlimTip=true;
+                        }
+                    }
+
+                }
+            }
+        }
     }
-    fun updateBiljke (biljke: List<Biljka>) {
+
+
+    fun updateBiljke(biljke: List<Biljka>) {
         this.biljke = biljke
         notifyDataSetChanged()
     }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val slikaItem: ImageView = itemView.findViewById(R.id.slikaItem)
         val nazivItem: TextView = itemView.findViewById(R.id.nazivItem)
@@ -50,6 +67,5 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>)
         val korist1Item: TextView = itemView.findViewById(R.id.korist1Item)
         val korist2Item: TextView = itemView.findViewById(R.id.korist2Item)
         val korist3Item: TextView = itemView.findViewById(R.id.korist3Item)
-
     }
 }

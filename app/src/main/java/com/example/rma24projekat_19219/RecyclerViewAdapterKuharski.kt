@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
@@ -19,16 +20,30 @@ class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
     override fun getItemCount(): Int = biljke.size
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.nazivItem.text = biljke[position].naziv;
-        holder.profilOkusaItem.text = biljke[position].profilOkusa.toString();
+        holder.profilOkusaItem.text = biljke[position].profilOkusa.opis
 
-        val jelo1Item = biljke[position].jela[0]
-        holder.jelo1Item.text=jelo1Item
+        val jelaList = biljke[position].jela
 
-        val jelo2Item = biljke[position].jela[1]
-        holder.jelo2Item.text = jelo2Item
+        try {
+            val jelo1Item = jelaList[0]
+            holder.jelo1Item.text = jelo1Item
+        } catch (e: IndexOutOfBoundsException) {
+            holder.jelo1Item.text = ""
+        }
 
-        val jelo3Item = biljke[position].jela[2]
-        holder.Jelo3Item.text = jelo3Item
+        try {
+            val jelo2Item = jelaList.getOrNull(1)
+            holder.jelo2Item.text = jelo2Item ?: ""
+        } catch (e: IndexOutOfBoundsException) {
+            holder.jelo2Item.text = ""
+        }
+
+        try {
+            val jelo3Item = jelaList.getOrNull(2)
+            holder.jelo3Item.text = jelo3Item ?: ""
+        } catch (e: IndexOutOfBoundsException) {
+            holder.jelo3Item.text = ""
+        }
 
         val profilOkusaItem: String = biljke[position].profilOkusa.toString()
         val context: Context = holder.slikaItem.context
@@ -38,6 +53,10 @@ class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
         if (id==0) id=context.resources
             .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
         holder.slikaItem.setImageResource(id)
+        holder.itemView.setOnClickListener {
+            val clickedBiljka = biljke[position]
+            Toast.makeText(holder.itemView.context, "Clicked: ${clickedBiljka.naziv}", Toast.LENGTH_SHORT).show()
+        }
     }
     fun updateBiljke (biljke: List<Biljka>) {
         this.biljke = biljke
@@ -49,7 +68,6 @@ class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
         val profilOkusaItem: TextView = itemView.findViewById(R.id.profilOkusaItem)
         val jelo1Item: TextView = itemView.findViewById(R.id.jelo1Item)
         val jelo2Item: TextView = itemView.findViewById(R.id.jelo2Item)
-        val Jelo3Item: TextView = itemView.findViewById(R.id.jelo3Item)
-
+        val jelo3Item: TextView = itemView.findViewById(R.id.jelo3Item)
     }
 }

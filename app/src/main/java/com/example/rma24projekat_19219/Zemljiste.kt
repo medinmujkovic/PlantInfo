@@ -1,5 +1,7 @@
 package com.example.rma24projekat_19219
 
+typealias Zemljište = Zemljiste
+
 enum class Zemljiste(val naziv: String){
     PJESKOVITO("Pjeskovito zemljište"),
     GLINENO("Glinеno zemljište"),

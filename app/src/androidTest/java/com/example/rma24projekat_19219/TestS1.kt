@@ -47,7 +47,7 @@ class TestS1 {
             "Bosiljak (Ocimum basilicum)",
             "Nana (Mentha spicata)",
             "Kamilica (Matricaria chamomilla)",
-            "RuÅ¾marin (Rosmarinus officinalis)",
+            "Ružmarin (Rosmarinus officinalis)",
             "Lavanda (Lavandula angustifolia)"
         )
         for (naziv in listaNaziva)

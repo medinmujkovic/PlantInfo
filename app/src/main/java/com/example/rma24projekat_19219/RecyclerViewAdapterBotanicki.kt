@@ -20,12 +20,8 @@ class RecyclerViewAdapterBotanicki(private var biljke: List<Biljka>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.nazivItem.text = biljke[position].naziv;
         holder.porodicaItem.text = biljke[position].porodica;
-
-        val klimatskiTipovi = biljke[position].klimatskiTipovi.joinToString(", ")
-        holder.klimatskiTipItem.text = klimatskiTipovi
-
-        val zemljisniTipovi = biljke[position].zemljisniTipovi.joinToString(", ")
-        holder.zemljisniTipItem.text = zemljisniTipovi
+        holder.klimatskiTipItem.text =  biljke[position].klimatskiTipovi.firstOrNull()?.opis?:""
+        holder.zemljisniTipItem.text = biljke[position].zemljisniTipovi.firstOrNull()?.naziv?:""
 
         val porodica: String = biljke[position].porodica
         val context: Context = holder.slikaItem.context
@@ -35,6 +31,8 @@ class RecyclerViewAdapterBotanicki(private var biljke: List<Biljka>)
         if (id==0) id=context.resources
             .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
         holder.slikaItem.setImageResource(id)
+
+        holder.itemView.setOnClickListener{biljke[position].naziv}
     }
     fun updateBiljke (biljke: List<Biljka>) {
         this.biljke = biljke
