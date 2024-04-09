@@ -55,27 +55,38 @@ class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
 
         holder.itemView.setOnClickListener {
             val lista = mutableListOf<Biljka>()
-            val selectedBiljka = biljke[position]
-
+            val selectedBiljka = biljke.getOrNull(position)
             if (selectedBiljka == null) {
                 updateBiljke(biljke)
                 return@setOnClickListener
             }
 
+            val koristiList = selectedBiljka.jela
             for (biljka in biljke) {
-                if (biljka.profilOkusa == selectedBiljka.profilOkusa) {
-                    val klimatskiMatches = biljka.klimatskiTipovi.containsAll(selectedBiljka.klimatskiTipovi)
-                    val zemljisniMatches = biljka.zemljisniTipovi.containsAll(selectedBiljka.zemljisniTipovi)
+                if (biljka.naziv == selectedBiljka.naziv) {
+                    var jelo1 = false
+                    var jelo2 = false
+                    var jelo3 = false
 
-                    if (klimatskiMatches && zemljisniMatches) {
+                    if (koristiList.size > 0 && koristiList[0] in biljka.jela) {
+                        jelo1 = true
+                    }
+
+                    if (koristiList.size > 1 && koristiList[1] in biljka.jela) {
+                        jelo2 = true
+                    }
+
+                    if (koristiList.size > 2 && koristiList[2] in biljka.jela) {
+                        jelo3 = true
+                    }
+
+                    if (jelo1 && jelo2 && jelo3) {
                         lista.add(biljka)
                     }
                 }
             }
-
             updateBiljke(lista)
         }
-
     }
     fun updateBiljke (biljke: List<Biljka>) {
         this.biljke = biljke

@@ -36,30 +36,28 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) : Recycler
         holder.korist2Item.text = (koristiList.getOrNull(1) ?.opis?: "")
         holder.korist3Item.text = (koristiList.getOrNull(2) ?.opis?: "")
 
-        holder.itemView.setOnClickListener{
-            val lista= mutableListOf<Biljka>()
-            val selectedBiljka = biljke[position]
-
+        holder.itemView.setOnClickListener {
+            val selectedBiljka = biljke.getOrNull(position)
             if (selectedBiljka == null) {
                 updateBiljke(biljke)
                 return@setOnClickListener
             }
 
+            val lista = mutableListOf<Biljka>()
             for (biljka in biljke) {
-                if (biljka.naziv == selectedBiljka.naziv) {
-                    val koristiList = biljka.medicinskeKoristi
-                    val koristMatches = koristiList.size == 3 &&
-                            koristiList[0].opis in selectedBiljka.medicinskeKoristi[0].opis &&
-                            koristiList[1].opis in selectedBiljka.medicinskeKoristi[1].opis &&
-                            koristiList[2].opis in selectedBiljka.medicinskeKoristi[2].opis
-
-                    if (koristMatches) {
-                        lista.add(biljka)
-                    }
+                if (biljka.naziv == selectedBiljka.naziv &&
+                    biljka.medicinskoUpozorenje == selectedBiljka.medicinskoUpozorenje &&
+                    biljka.medicinskeKoristi[0] == selectedBiljka.medicinskeKoristi[0]  &&
+                    biljka.medicinskeKoristi[1]  == selectedBiljka.medicinskeKoristi[1]  &&
+                    biljka.medicinskeKoristi[2] == selectedBiljka.medicinskeKoristi[2]
+                ) {
+                    lista.add(biljka)
                 }
             }
             updateBiljke(lista)
         }
+
+
 
     }
 
