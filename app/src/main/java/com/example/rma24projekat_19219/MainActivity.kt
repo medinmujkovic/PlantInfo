@@ -1,9 +1,6 @@
 package com.example.rma24projekat_19219
 
-import android.content.Context
 import android.os.Bundle
-import android.view.GestureDetector
-import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,7 +11,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.contrib.RecyclerViewActions
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter=RecyclerViewAdapterMedicinski(biljke);
         recyclerView.scrollToPosition(R.id.biljkeRV);
-
 
 
         if (spinner != null) {
