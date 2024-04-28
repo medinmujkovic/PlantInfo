@@ -21,26 +21,13 @@ class TestS2{
 
     @Test
     fun testValidacijaUnosa() {
-        // Testiranje validacije ako nisu odabrane medicinske koristi
-        // Očekujemo da će se prikazati poruka o grešci
-        // Ova provjera treba biti izvršena nakon klikanja na dugme "Dodaj biljku"
-
-        // Simulacija klika na dugme "Dodaj biljku"
         onView(withId(R.id.dodajBiljkuBtn)).perform(click())
-
-        // Provjera da li se prikazala poruka o grešci za odabir medicinskih koristi
         onView(withId(R.id.medicinskaKoristLV)).check(matches(hasErrorText("Odaberite barem jednu medicinsku korist")))
     }
 
     @Test
     fun testPrikazSlikeBiljke() {
-        // Testiranje prikaza slike biljke nakon klika na dugme "Uslikaj biljku"
-        // Očekujemo da će se slika biljke prikazati u ImageView elementu
-
-        // Simulacija klika na dugme "Uslikaj biljku"
         onView(withId(R.id.uslikajBiljkuBtn)).perform(click())
-
-        // Provjera da li se slika biljke prikazala u ImageView elementu
         onView(withId(R.id.slikaIV)).check(matches(isDisplayed()))
     }
 }
