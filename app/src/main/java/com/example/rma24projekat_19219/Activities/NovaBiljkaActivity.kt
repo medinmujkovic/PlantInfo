@@ -1,3 +1,5 @@
+package com.example.rma24projekat_19219.Activities
+
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -13,12 +15,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.Biljka
-import com.example.rma24projekat_19219.KlimatskiTip
-import com.example.rma24projekat_19219.MainActivity
-import com.example.rma24projekat_19219.MedicinskaKorist
-import com.example.rma24projekat_19219.ProfilOkusaBiljke
+import com.example.rma24projekat_19219.Types.KlimatskiTip
+import com.example.rma24projekat_19219.Types.MedicinskaKorist
+import com.example.rma24projekat_19219.Types.ProfilOkusaBiljke
 import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.Zemljiste
+import com.example.rma24projekat_19219.Types.Zemljiste
 
 class NovaBiljkaActivity : AppCompatActivity() {
 

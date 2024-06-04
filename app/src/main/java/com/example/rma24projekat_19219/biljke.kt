@@ -1,10 +1,10 @@
 package com.example.rma24projekat_19219
 
-import com.example.rma24projekat_19219.MedicinskaKorist
-import com.example.rma24projekat_19219.ProfilOkusaBiljke
-import com.example.rma24projekat_19219.KlimatskiTip
-import com.example.rma24projekat_19219.Zemljiste
-import com.example.rma24projekat_19219.Biljka
+import com.example.rma24projekat_19219.Types.MedicinskaKorist
+import com.example.rma24projekat_19219.Types.ProfilOkusaBiljke
+import com.example.rma24projekat_19219.Types.KlimatskiTip
+import com.example.rma24projekat_19219.Types.Zemljiste
+import com.example.rma24projekat_19219.Types.Zemljište
 
 val biljke = listOf(
     Biljka(

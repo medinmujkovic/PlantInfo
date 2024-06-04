@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219
+package com.example.rma24projekat_19219.Types
 
 enum class ProfilOkusaBiljke(val opis: String) {
     MENTA("Mentol - osvježavajući, hladan ukus"),
