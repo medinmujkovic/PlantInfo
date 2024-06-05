@@ -13,7 +13,9 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterMedicinski
 import com.example.rma24projekat_19219.Biljka
 import com.example.rma24projekat_19219.Types.KlimatskiTip
 import com.example.rma24projekat_19219.Types.MedicinskaKorist

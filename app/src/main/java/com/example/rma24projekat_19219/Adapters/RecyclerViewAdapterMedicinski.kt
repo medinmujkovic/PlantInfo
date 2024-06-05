@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.Biljka
 import com.example.rma24projekat_19219.R
 
-class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) : RecyclerView.Adapter<RecyclerViewAdapterMedicinski.ViewHolder>() {
+class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) :
+    RecyclerView.Adapter<RecyclerViewAdapterMedicinski.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.medicinski_mod, parent, false)
         return ViewHolder(view)
@@ -20,7 +21,6 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) : Recycler
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentBiljka = biljke[position]
-
 
         holder.nazivItem.text = currentBiljka.naziv
         holder.upozorenjeItem.text = currentBiljka.medicinskoUpozorenje
@@ -62,7 +62,6 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) : Recycler
 
 
     }
-
 
     fun updateBiljke(biljke: List<Biljka>) {
         this.biljke = biljke

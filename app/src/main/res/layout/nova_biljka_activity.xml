@@ -5,163 +5,166 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/nazivET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Naziv"
-        app:layout_constraintBottom_toTopOf="@+id/porodicaET"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/porodicaET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="104dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Porodica"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nazivET" />
-
-    <EditText
-        android:id="@+id/medicinskoUpozorenjeET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="104dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Medicinsko upozorenje"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/porodicaET" />
-
-    <EditText
-        android:id="@+id/jeloET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="24dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Jelo"
-        app:layout_constraintBottom_toTopOf="@+id/LinearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicinskoUpozorenjeET" />
-
     <LinearLayout
         android:id="@+id/LinearLayout"
-        android:layout_width="399dp"
-        android:layout_height="420dp"
+        android:layout_width="395dp"
+        android:layout_height="702dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jeloET">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+
+        <EditText
+            android:id="@+id/nazivET"
+            android:layout_width="318dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Naziv" />
+
+        <EditText
+            android:id="@+id/porodicaET"
+            android:layout_width="318dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Porodica" />
+
+        <EditText
+            android:id="@+id/medicinskoUpozorenjeET"
+            android:layout_width="318dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Medicinsko upozorenje" />
+
+        <EditText
+            android:id="@+id/jeloET"
+            android:layout_width="319dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Jelo" />
+
+        <Button
+            android:id="@+id/dodajJeloBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="8dp"
+            android:text="Dodaj jelo"
+            tools:layout_editor_absoluteX="-27dp"
+            tools:layout_editor_absoluteY="717dp" />
+
+        <ListView
+            android:id="@+id/medicinskaKoristLV"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:choiceMode="multipleChoice">
+
+        </ListView>
+
+        <ListView
+            android:id="@+id/klimatskiTipLV"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:choiceMode="multipleChoice">
+
+        </ListView>
+
+        <ListView
+            android:id="@+id/zemljisniTipLV"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:choiceMode="multipleChoice" />
+
+        <ListView
+            android:id="@+id/profilOkusaLV"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:choiceMode="singleChoice">
+
+        </ListView>
+
+        <ListView
+            android:id="@+id/jelaLV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="24dp">
+            android:choiceMode="singleChoice"
+            android:visibility="gone">
 
-            <ListView
-                android:id="@+id/medicinskaKoristLV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="8dp"
-                android:choiceMode="multipleChoice">
+        </ListView>
 
-            </ListView>
-
-            <ListView
-                android:id="@+id/klimatskiTipLV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:choiceMode="multipleChoice">
-
-            </ListView>
-
-            <ListView
-                android:id="@+id/zemljisniTipLV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:choiceMode="multipleChoice" />
-
-            <ListView
-                android:id="@+id/profilOkusaLV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:choiceMode="singleChoice">
-
-            </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/slikaIV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="7dp"
+                android:layout_width="128dp"
+                android:layout_height="89dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginEnd="9dp"
-                android:layout_marginBottom="150dp"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
-            <ListView
-                android:id="@+id/jelaLV"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:choiceMode="singleChoice"
-                android:visibility="gone">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            </ListView>
+                <Button
+                    android:id="@+id/uslikajBiljkuBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="75dp"
+                    android:text="Uslikaj biljku" />
 
-            <Button
-                android:id="@+id/uslikajBiljkuBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="uslikajBiljkuBtn" />
+                <Button
+                    android:id="@+id/dodajBiljkuBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginTop="4dp"
+                    android:onClick="dodajBiljku"
+                    android:text="Dodaj biljku" />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/dodajBiljkuBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:onClick="dodajBiljku"
-                android:text="Dodaj biljku" />
+        </LinearLayout>
 
-            <Button
-                android:id="@+id/dodajJeloBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="48dp"
-                android:layout_marginBottom="15dp"
-                android:text="Dodaj jelo" />
-        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

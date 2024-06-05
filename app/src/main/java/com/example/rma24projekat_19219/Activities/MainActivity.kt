@@ -3,6 +3,8 @@ package com.example.rma24projekat_19219.Activities
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.R
 
 class MainActivity : AppCompatActivity() {
@@ -10,6 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.nova_biljka_activity)
+
+
 
 //        val mods = resources.getStringArray(R.array.Modovi)
 //        val spinner = findViewById<Spinner>(R.id.modSpinner)
