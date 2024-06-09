@@ -13,24 +13,27 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterMedicinski
 import com.example.rma24projekat_19219.Biljka
 import com.example.rma24projekat_19219.Types.KlimatskiTip
 import com.example.rma24projekat_19219.Types.MedicinskaKorist
 import com.example.rma24projekat_19219.Types.ProfilOkusaBiljke
 import com.example.rma24projekat_19219.R
+import com.example.rma24projekat_19219.Trefle.TrefleDAO
 import com.example.rma24projekat_19219.Types.Zemljiste
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NovaBiljkaActivity : AppCompatActivity() {
 
     private lateinit var jelaList: MutableList<String>
     private lateinit var jelaAdapter: ArrayAdapter<String>
-
     private lateinit var jeloET: EditText
     private lateinit var dodajJeloBtn: Button
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var biljke: MutableList<Biljka>
     private lateinit var dodajBiljkuBtn: Button
@@ -41,9 +44,10 @@ class NovaBiljkaActivity : AppCompatActivity() {
     private lateinit var klimatskiTipLV: ListView
     private lateinit var zemljisniTipLV: ListView
     private lateinit var profilOkusaLV: ListView
-
     private lateinit var slikaIV: ImageView
     private val REQUEST_IMAGE_CAPTURE = 1
+    private val trefleDAO = TrefleDAO(this)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,13 +109,13 @@ class NovaBiljkaActivity : AppCompatActivity() {
         dodajJeloBtn.setOnClickListener {
             val novoJelo = jeloET.text.toString().trim()
             if (novoJelo.isNotEmpty()) {
-//                val postojeceJelo = jelaList.find { it.equals(novoJelo, ignoreCase = true) }
-//                if (postojeceJelo != null) {
-//                    val index = jelaList.indexOf(postojeceJelo)
-//                    jelaList[index] = novoJelo
-//                } else {
-//                    jelaList.add(novoJelo)
-//                }
+                val postojeceJelo = jelaList.find { it.equals(novoJelo, ignoreCase = true) }
+                if (postojeceJelo != null) {
+                    val index = jelaList.indexOf(postojeceJelo)
+                    jelaList[index] = novoJelo
+                } else {
+                    jelaList.add(novoJelo)
+                }
                 if (jelaList.contains(novoJelo)) {
                     val i = jelaList.indexOf(novoJelo)
                     jelaList[i] = novoJelo
@@ -165,6 +169,13 @@ class NovaBiljkaActivity : AppCompatActivity() {
                 intent.putExtra("biljkeList", biljke.toTypedArray())
                 startActivity(intent)
                 onBackPressed()
+
+                GlobalScope.launch(Dispatchers.IO) {
+                    val ispravljenaBiljka = trefleDAO.fixData(novaBiljka)
+                    withContext(Dispatchers.Main) {
+                        biljke.add(ispravljenaBiljka)
+                    }
+                }
             }
         }
 

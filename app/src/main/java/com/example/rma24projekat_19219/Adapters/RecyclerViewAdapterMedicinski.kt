@@ -60,7 +60,6 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) :
         }
 
 
-
     }
 
     fun updateBiljke(biljke: List<Biljka>) {
