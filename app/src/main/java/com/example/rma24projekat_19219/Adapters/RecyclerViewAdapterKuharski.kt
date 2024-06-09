@@ -9,36 +9,49 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.Biljka
 import com.example.rma24projekat_19219.R
+import com.example.rma24projekat_19219.Trefle.TrefleDAO
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
     : RecyclerView.Adapter<RecyclerViewAdapterKuharski.ViewHolder>() {
+    private lateinit var trefleDAO: TrefleDAO
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.kuharski_mod, parent, false)
+        trefleDAO = TrefleDAO()
         return ViewHolder(view)
     }
     override fun getItemCount(): Int = biljke.size
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val context: Context = holder.slikaItem.context
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val image = trefleDAO.getImage(biljke[position])
+                holder.slikaItem.setImageBitmap(image)
+            } catch (e: Exception) {
+                holder.slikaItem.setImageResource(R.drawable.ic_launcher_background)
+            }
+        }
+
         holder.nazivItem.text = biljke[position].naziv;
         holder.profilOkusaItem.text = biljke[position].profilOkusa.opis
-
         val jelaList = biljke[position].jela
-
         try {
             val jelo1Item = jelaList[0]
             holder.jelo1Item.text = jelo1Item
         } catch (e: IndexOutOfBoundsException) {
             holder.jelo1Item.text = ""
         }
-
         try {
             val jelo2Item = jelaList.getOrNull(1)
             holder.jelo2Item.text = jelo2Item ?: ""
         } catch (e: IndexOutOfBoundsException) {
             holder.jelo2Item.text = ""
         }
-
         try {
             val jelo3Item = jelaList.getOrNull(2)
             holder.jelo3Item.text = jelo3Item ?: ""
@@ -47,13 +60,12 @@ class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
         }
 
         val profilOkusaItem: String = biljke[position].profilOkusa.toString()
-        val context: Context = holder.slikaItem.context
 
-        var id: Int = context.resources
-            .getIdentifier(profilOkusaItem, "drawable", context.packageName)
-        if (id==0) id=context.resources
-            .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
-        holder.slikaItem.setImageResource(id)
+//        var id: Int = context.resources
+//            .getIdentifier(profilOkusaItem, "drawable", context.packageName)
+//        if (id==0) id=context.resources
+//            .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
+//        holder.slikaItem.setImageResource(id)
 
         holder.itemView.setOnClickListener {
             val lista = mutableListOf<Biljka>()

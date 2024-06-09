@@ -7,7 +7,7 @@ import com.example.rma24projekat_19219.Types.Zemljiste
 
 data class Biljka(
     var naziv: String,
-    var porodica: String,
+    var porodica: String?,
     var medicinskoUpozorenje: String,
     var medicinskeKoristi: List<MedicinskaKorist>,
     var profilOkusa: ProfilOkusaBiljke,

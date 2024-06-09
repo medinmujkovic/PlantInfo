@@ -9,11 +9,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.Biljka
 import com.example.rma24projekat_19219.R
+import com.example.rma24projekat_19219.Trefle.TrefleDAO
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) :
     RecyclerView.Adapter<RecyclerViewAdapterMedicinski.ViewHolder>() {
+    private lateinit var trefleDAO: TrefleDAO
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.medicinski_mod, parent, false)
+        trefleDAO = TrefleDAO()
         return ViewHolder(view)
     }
 
@@ -26,11 +33,21 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) :
         holder.upozorenjeItem.text = currentBiljka.medicinskoUpozorenje
 
         val context: Context = holder.slikaItem.context
-        var id = context.resources.getIdentifier(currentBiljka.naziv, "drawable", context.packageName)
-        holder.slikaItem.setImageResource(id)
-        if (id==0) id=context.resources
-            .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
-        holder.slikaItem.setImageResource(id)
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val image = trefleDAO.getImage(currentBiljka)
+                holder.slikaItem.setImageBitmap(image)
+            } catch (e: Exception) {
+                // Handle exception, e.g., set a placeholder image
+                holder.slikaItem.setImageResource(R.drawable.ic_launcher_background)
+            }
+        }
+
+//        var id = context.resources.getIdentifier(currentBiljka.naziv, "drawable", context.packageName)
+//        holder.slikaItem.setImageResource(id)
+//        if (id==0) id=context.resources
+//            .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
+//        holder.slikaItem.setImageResource(id)
 
 
         val koristiList = currentBiljka.medicinskeKoristi

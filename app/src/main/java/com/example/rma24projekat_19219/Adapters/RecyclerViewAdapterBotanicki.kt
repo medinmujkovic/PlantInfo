@@ -9,30 +9,48 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.Biljka
 import com.example.rma24projekat_19219.R
+import com.example.rma24projekat_19219.Trefle.TrefleDAO
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class RecyclerViewAdapterBotanicki(private var biljke: List<Biljka>)
     : RecyclerView.Adapter<RecyclerViewAdapterBotanicki.ViewHolder>() {
+
+    private lateinit var trefleDAO: TrefleDAO
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.botanicki_mod, parent, false)
+        trefleDAO = TrefleDAO()
         return ViewHolder(view)
     }
     override fun getItemCount(): Int = biljke.size
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val context: Context = holder.slikaItem.context
+
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val image = trefleDAO.getImage(biljke[position])
+                holder.slikaItem.setImageBitmap(image)
+            } catch (e: Exception) {
+                // Handle exception, e.g., set a placeholder image
+                holder.slikaItem.setImageResource(R.drawable.ic_launcher_background)
+            }
+        }
+
         holder.nazivItem.text = biljke[position].naziv;
         holder.porodicaItem.text = biljke[position].porodica;
         holder.klimatskiTipItem.text =  biljke[position].klimatskiTipovi.firstOrNull()?.opis?:""
         holder.zemljisniTipItem.text = biljke[position].zemljisniTipovi.firstOrNull()?.naziv?:""
 
-        val porodica: String = biljke[position].porodica
-        val context: Context = holder.slikaItem.context
+        val porodica: String? = biljke[position].porodica
 
-        var id: Int = context.resources
-            .getIdentifier(porodica, "drawable", context.packageName)
-        if (id==0) id=context.resources
-            .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
-        holder.slikaItem.setImageResource(id)
+//        var id: Int = context.resources
+//            .getIdentifier(porodica, "drawable", context.packageName)
+//        if (id==0) id=context.resources
+//            .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
+//        holder.slikaItem.setImageResource(id)
 
         holder.itemView.setOnClickListener{
             val lista= mutableListOf<Biljka>()

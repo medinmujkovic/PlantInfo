@@ -33,6 +33,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
 }
 
 dependencies {
@@ -44,19 +45,22 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.espresso.contrib)
     implementation(libs.androidx.contentpager)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-
-    androidTestImplementation(libs.core.ktx)
-    androidTestImplementation(libs.androidx.junit.ktx)
-    testImplementation(libs.hamcrest.v13)
-    androidTestImplementation(libs.androidx.espresso.intents)
-    testImplementation(libs.hamcrest.hamcrest)
-
     implementation(libs.retrofit)
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.glide)
+    androidTestImplementation("org.testng:testng:6.9.6")
     annotationProcessor(libs.compiler)
+    testImplementation("org.json:json:20140107")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+    testImplementation ("org.assertj:assertj-core:3.26.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.mockito:mockito-core:4.0.0")
+    testImplementation ("androidx.test:core:1.4.0")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+
+
+
+
 }

@@ -1,7 +1,5 @@
 package com.example.rma24projekat_19219
 
-import android.content.Context
-import androidx.test.core.app.ApplicationProvider
 import com.example.rma24projekat_19219.Trefle.TrefleDAO
 import com.example.rma24projekat_19219.Types.KlimatskiTip
 import com.example.rma24projekat_19219.Types.MedicinskaKorist
@@ -14,20 +12,17 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension
-import org.assertj.core.api.SoftAssertions
-import org.junit.jupiter.api.extension.ExtendWith
-
 
 @RunWith(JUnit4::class)
+
 class TestS3 {
     @get:Rule
     var softAssert = JUnitSoftAssertions()
-    private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Test
     fun fixBosiljakTest() = runBlocking{
-        var fixed = TrefleDAO(context).fixData(    Biljka(
+        var fixed = TrefleDAO().fixData(
+            Biljka(
             naziv = "Bosiljak (Ocimum basilicum)",
             porodica = "Netacno (usnate)",
             medicinskoUpozorenje = "Može iritati kožu osjetljivu na sunce. Preporučuje se oprezna upotreba pri korištenju ulja bosiljka.",
@@ -39,7 +34,8 @@ class TestS3 {
             jela = listOf("Salata od paradajza", "Punjene tikvice"),
             klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUBTROPSKA),
             zemljisniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA),
-        ))
+        )
+        )
         softAssert.assertThat(fixed.naziv).withFailMessage("T1.1 - naziv should contain \"Ocium basilicum\"").contains("Ocimum basilicum")
         softAssert.assertThat(fixed.porodica).withFailMessage("T1.2 - porodica should contain \"Lamiaceae\"").contains("Lamiaceae")
         softAssert.assertThat(fixed.medicinskoUpozorenje).withFailMessage("T1.3 - upozorenje should contain \"NIJE JESTIVO\"").contains("NIJE JESTIVO")
@@ -49,7 +45,7 @@ class TestS3 {
 
     @Test
     fun fixEpipactisHelleborine()= runBlocking {
-        var fixed = TrefleDAO(context).fixData(    Biljka(
+        var fixed = TrefleDAO().fixData(    Biljka(
             naziv = "Kruscika (Epipactis helleborine)",
             porodica = "Netacno (netacno)",
             medicinskoUpozorenje = "Može iritati kožu osjetljivu na sunce. Preporučuje se oprezna upotreba pri korištenju ulja bosiljka.",
@@ -61,7 +57,8 @@ class TestS3 {
             jela = listOf("Salata od paradajza", "Punjene tikvice"),
             klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUBTROPSKA),
             zemljisniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA),
-        ))
+        )
+        )
 
         softAssert.assertThat(fixed.naziv).withFailMessage("T2.1 - naziv should contain \"Epipactis helleborine\"").contains("Epipactis helleborine")
         softAssert.assertThat(fixed.medicinskoUpozorenje).withFailMessage("T2.2 - upozorenje should contain \"NIJE JESTIVO\"").contains("NIJE JESTIVO")
@@ -71,13 +68,13 @@ class TestS3 {
 
     @Test
     fun getFlowerRosaPurple()= runBlocking {
-        var plants = TrefleDAO(context).getPlantsWithFlowerColor("purple","rosa")
+        var plants = TrefleDAO().getPlantsWithFlowerColor("purple","rosa")
         assertTrue("T3.1 - should contain \"Rosa pendulina\"",plants.find { biljka -> biljka.naziv.contains("Rosa pendulina",ignoreCase = true) }!=null)
     }
 
     @Test
     fun getFlowerRampionBlue()= runBlocking {
-        var plants = TrefleDAO(context).getPlantsWithFlowerColor("blue","rampion")
+        var plants = TrefleDAO().getPlantsWithFlowerColor("blue","rampion")
         assertTrue("T4.1 - should contain \"Phyteuma spicatum\"",plants.find { biljka -> biljka.naziv.contains("Phyteuma spicatum",ignoreCase = true) }!=null)
     }
 }

@@ -13,16 +13,14 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.Biljka
+import com.example.rma24projekat_19219.R
+import com.example.rma24projekat_19219.Trefle.TrefleDAO
 import com.example.rma24projekat_19219.Types.KlimatskiTip
 import com.example.rma24projekat_19219.Types.MedicinskaKorist
 import com.example.rma24projekat_19219.Types.ProfilOkusaBiljke
-import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.Trefle.TrefleDAO
 import com.example.rma24projekat_19219.Types.Zemljiste
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -46,13 +44,18 @@ class NovaBiljkaActivity : AppCompatActivity() {
     private lateinit var profilOkusaLV: ListView
     private lateinit var slikaIV: ImageView
     private val REQUEST_IMAGE_CAPTURE = 1
-    private val trefleDAO = TrefleDAO(this)
+    private lateinit var trefleDAO: TrefleDAO
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.nova_biljka_activity)
+
+        trefleDAO = TrefleDAO()
+        trefleDAO.setContext(this)
+
+        enableEdgeToEdge()
+
 
         /*************Korist***********/
         medicinskaKoristLV = findViewById<ListView>(R.id.medicinskaKoristLV)
@@ -197,41 +200,43 @@ class NovaBiljkaActivity : AppCompatActivity() {
         profilOkusa: ProfilOkusaBiljke,
         jelaa: List<String>,
         klimatskiTipp: List<KlimatskiTip>,
-        zemljisniTipp: List<Zemljiste>,): Boolean {
+        zemljisniTipp: List<Zemljiste>
+    ): Boolean {
         if (naziv.length < 3 || naziv.length > 20) {
-            nazivET.setError("Naziv mora biti između 3 i 20 znakova")
+            nazivET.error = "Naziv mora biti između 3 i 20 znakova"
             return false
         }
         if (porodica.length < 3 || porodica.length > 20) {
-            porodicaET.setError("Porodica mora biti između 3 i 20 znakova")
+            porodicaET.error = "Porodica mora biti između 3 i 20 znakova"
             return false
         }
         if (medicinskoUpozorenje.length < 3 || medicinskoUpozorenje.length > 20) {
-            medicinskoUpozorenjeET.setError("Medicinsko upozorenje mora biti između 3 i 20 znakova")
+            medicinskoUpozorenjeET.error = "Medicinsko upozorenje mora biti između 3 i 20 znakova"
             return false
         }
-        if (profilOkusa.toString().isEmpty()) {
-            prikaziToast("Odaberite barem jedan profil okusa")
+        if (profilOkusa == null) {
+            prikaziToast("Odaberite profil okusa")
             return false
         }
-        if (medicinskaKoristt.toString().isEmpty()) {
-            prikaziToast("Odaberite jednu medicinsku korist")
+        if (medicinskaKoristt.isEmpty()) {
+            prikaziToast("Odaberite medicinsku korist")
             return false
         }
-        if (jelaa.toString().isEmpty()) {
-            prikaziToast("Odaberite barem jedno jelo")
+        if (jelaa.isEmpty()) {
+            prikaziToast("Dodajte jelo")
             return false
         }
-        if (klimatskiTipp.toString().isEmpty()) {
-            prikaziToast("Odaberite barem jedan klimatski tip")
+        if (klimatskiTipp.isEmpty()) {
+            prikaziToast("Odaberite klimatski tip")
             return false
         }
-        if (zemljisniTipp.toString().isEmpty()) {
-            prikaziToast("Odaberite barem jedan zemljisni tip")
+        if (zemljisniTipp.isEmpty()) {
+            prikaziToast("Odaberite zemljisni tip")
             return false
         }
         return true
     }
+
 
     /********selected*****/
     private fun getOdabraniProfilOkusa(): ProfilOkusaBiljke {

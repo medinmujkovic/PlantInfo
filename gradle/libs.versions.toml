@@ -21,6 +21,7 @@ okhttp = "4.9.0"
 retrofit = "2.9.0"
 
 [libraries]
+androidx-core = { module = "androidx.test:core", version.ref = "coreKtxVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espressoCore" }
 androidx-junit-ktx = { module = "androidx.test.ext:junit-ktx", version.ref = "junitVersion" }

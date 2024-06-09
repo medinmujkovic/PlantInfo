@@ -77,8 +77,8 @@
 
         <ListView
             android:id="@+id/medicinskaKoristLV"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_width="354dp"
+            android:layout_height="46dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -89,8 +89,8 @@
 
         <ListView
             android:id="@+id/klimatskiTipLV"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_width="353dp"
+            android:layout_height="49dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
@@ -100,8 +100,8 @@
 
         <ListView
             android:id="@+id/zemljisniTipLV"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_width="354dp"
+            android:layout_height="45dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
@@ -109,8 +109,8 @@
 
         <ListView
             android:id="@+id/profilOkusaLV"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_width="354dp"
+            android:layout_height="55dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
