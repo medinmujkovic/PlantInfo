@@ -15,13 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterBotanicki
 import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterKuharski
 import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterMedicinski
-import com.example.rma24projekat_19219.Biljka
 import com.example.rma24projekat_19219.R
 import com.example.rma24projekat_19219.Trefle.TrefleDAO
-import com.example.rma24projekat_19219.Types.KlimatskiTip
-import com.example.rma24projekat_19219.Types.MedicinskaKorist
-import com.example.rma24projekat_19219.Types.ProfilOkusaBiljke
-import com.example.rma24projekat_19219.Types.Zemljiste
 import com.example.rma24projekat_19219.biljke
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -104,20 +99,20 @@ class MainActivity : AppCompatActivity() {
             if (query.isNotEmpty() && colors.contains(selectedColor)) {
                 GlobalScope.launch(Dispatchers.Main) {
                     try {
-                        var fixed = TrefleDAO().fixData(
-                            Biljka(
-                                naziv = "Bosiljak (Ocimum basilicum)",
-                                porodica = "Netacno (usnate)",
-                                medicinskoUpozorenje = "Može iritati kožu osjetljivu na sunce. Preporučuje se oprezna upotreba pri korištenju ulja bosiljka.",
-                                medicinskeKoristi = listOf(
-                                    MedicinskaKorist.SMIRENJE,
-                                    MedicinskaKorist.REGULACIJAPROBAVE
-                                ),
-                                profilOkusa = ProfilOkusaBiljke.BEZUKUSNO,
-                                jela = listOf("Salata od paradajza", "Punjene tikvice"),
-                                klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUBTROPSKA),
-                                zemljisniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA),
-                            ))
+//                        var fixed = TrefleDAO().fixData(
+//                            Biljka(
+//                                naziv = "Bosiljak (Ocimum basilicum)",
+//                                porodica = "Netacno (usnate)",
+//                                medicinskoUpozorenje = "Može iritati kožu osjetljivu na sunce. Preporučuje se oprezna upotreba pri korištenju ulja bosiljka.",
+//                                medicinskeKoristi = listOf(
+//                                    MedicinskaKorist.SMIRENJE,
+//                                    MedicinskaKorist.REGULACIJAPROBAVE
+//                                ),
+//                                profilOkusa = ProfilOkusaBiljke.BEZUKUSNO,
+//                                jela = listOf("Salata od paradajza", "Punjene tikvice"),
+//                                klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUBTROPSKA),
+//                                zemljisniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA),
+//                            ))
                         val plants = trefleDAO.getPlantsWithFlowerColor(selectedColor, query)
                         botanickiAdapter.updateBiljke(plants)
                     } catch (e: Exception) {

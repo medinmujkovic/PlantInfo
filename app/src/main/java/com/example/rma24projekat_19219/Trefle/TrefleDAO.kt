@@ -14,6 +14,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.io.InputStream
 import java.net.HttpURLConnection
@@ -51,9 +52,9 @@ class TrefleDAO (){
             @Query("token") apiKey: String = "WRsQtW2Qqa4PJm0-TE1QsLYxKqWFa286xG-tj-WdKL0"
         ): TrefleResponse
 
-        @GET("plants/search")
-        suspend fun searchPlantByLatinName(
-            @Query("q") latinName: String,
+        @GET("species/{id}")
+        suspend fun getPlantById(
+            @Path("id") id: String,
             @Query("token") apiKey: String = "WRsQtW2Qqa4PJm0-TE1QsLYxKqWFa286xG-tj-WdKL0"
         ): TrefleResponse
     }
@@ -86,12 +87,12 @@ class TrefleDAO (){
 
     suspend fun getImage(biljka: Biljka): Bitmap {
         return try {
-            val nazivBiljke=biljka.naziv;
+            val nazivBiljke = biljka.naziv
             val startIndex = nazivBiljke.indexOf("(") + 1
             val endIndex = nazivBiljke.indexOf(")")
-            val latinskiNaziv = nazivBiljke.substring(startIndex, endIndex)
+            val latinskiNaziv = nazivBiljke.substring(startIndex, endIndex).toLowerCase().replace(" ", "-")
 
-            val response = apiService.searchPlantByLatinName(latinskiNaziv)
+            val response = apiService.getPlantById(latinskiNaziv)
             val imageUrl = response.data.firstOrNull()?.image_url
             if (imageUrl != null) {
                 val bitmap = downloadImage(imageUrl)
@@ -120,12 +121,14 @@ class TrefleDAO (){
 
     suspend fun fixData(biljka: Biljka): Biljka {
         return try {
-            val nazivBiljke=biljka.naziv;
+            val nazivBiljke = biljka.naziv
             val startIndex = nazivBiljke.indexOf("(") + 1
             val endIndex = nazivBiljke.indexOf(")")
-            val latinskiNaziv = nazivBiljke.substring(startIndex, endIndex)
+            val latinskiNaziv = nazivBiljke.substring(startIndex, endIndex).toLowerCase().replace(" ", "-")
 
-            val response = apiService.searchPlantByLatinName(latinskiNaziv)
+            val response = apiService.getPlantById(latinskiNaziv)
+            println("API response data: ${response.data}")
+
             val plantData = response.data.firstOrNull()
 
             if (plantData != null) {
@@ -156,8 +159,9 @@ class TrefleDAO (){
                 val light = plantData.main_species?.specifications?.growth?.light ?: 0
                 val humidity = plantData.main_species?.specifications?.growth?.atmospheric_humidity ?: 0
                 val filteredClimateTypes = biljka.klimatskiTipovi.filter { climateType ->
-                    light in climateType.light && humidity in climateType.atmospheric_humidity
+                    light in climateType.light || humidity in climateType.atmospheric_humidity
                 }.toMutableList()
+
 
                 KlimatskiTip.values().forEach { climateType ->
                     if (light in climateType.light && humidity in climateType.atmospheric_humidity && !filteredClimateTypes.contains(climateType)) {
@@ -177,12 +181,16 @@ class TrefleDAO (){
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.getPlantsByFlowerColor(flowerColor)
-                response.data.filter { plant ->
-                    plant.common_name?.contains(substr, ignoreCase = true) == true || plant.scientific_name.contains(
-                        substr,
-                        ignoreCase = true
-                    )
-                }.map { plantData ->
+
+                val filteredPlants = response.data.filter { plant ->
+                    val commonNameMatches = plant.common_name?.contains(substr, ignoreCase = true) ?: false
+                    val scientificNameMatches = plant.scientific_name.contains(substr, ignoreCase = true)
+                    println("Filtering plant: ${plant.scientific_name}, matches: $commonNameMatches matches2: $scientificNameMatches")
+                    commonNameMatches || scientificNameMatches
+
+                }
+
+                val mappedPlants = filteredPlants.map { plantData ->
                     Biljka(
                         naziv = plantData.scientific_name,
                         porodica = plantData.family ?: "",
@@ -196,11 +204,17 @@ class TrefleDAO (){
                         zemljisniTipovi = mutableListOf()
                     )
                 }
+                println("API response data: ${response.data}")
+                println("Mapped plants: $mappedPlants")
+
+                mappedPlants
             } catch (e: Exception) {
                 emptyList()
             }
         }
     }
+
+
 
 
 }
