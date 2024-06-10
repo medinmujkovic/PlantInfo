@@ -49,6 +49,7 @@ class TrefleDAO (){
         @GET("plants")
         suspend fun getPlantsByFlowerColor(
             @Query("filter[flower_color]") flowerColor: String,
+            @Query("q") substr: String,
             @Query("token") apiKey: String = "WRsQtW2Qqa4PJm0-TE1QsLYxKqWFa286xG-tj-WdKL0"
         ): TrefleResponse
 
@@ -56,9 +57,11 @@ class TrefleDAO (){
         suspend fun getPlantById(
             @Path("id") id: String,
             @Query("token") apiKey: String = "WRsQtW2Qqa4PJm0-TE1QsLYxKqWFa286xG-tj-WdKL0"
-        ): TrefleResponse
+        ): TrefleResponse2
     }
-
+    data class TrefleResponse2(
+        val data: PlantData
+    )
     data class TrefleResponse(
         val data: List<PlantData>
     )
@@ -69,13 +72,11 @@ class TrefleDAO (){
         val family: String?,
         val edible: Boolean,
         val image_url: String?,
-        val main_species: MainSpecies?)
-    data class MainSpecies(
-        val specifications: Specifications?
+        val specifications: Specifications?,
+        val growth: Growth?
     )
     data class Specifications(
         val toxicity: String?,
-        val growth: Growth?
     )
     data class Growth(
         val soil_texture: List<String>?,
@@ -92,8 +93,9 @@ class TrefleDAO (){
             val endIndex = nazivBiljke.indexOf(")")
             val latinskiNaziv = nazivBiljke.substring(startIndex, endIndex).toLowerCase().replace(" ", "-")
 
+            println("apiservice ${apiService}")
             val response = apiService.getPlantById(latinskiNaziv)
-            val imageUrl = response.data.firstOrNull()?.image_url
+            val imageUrl = response.data.image_url
             if (imageUrl != null) {
                 val bitmap = downloadImage(imageUrl)
                 bitmap ?: defaultBitmap
@@ -124,12 +126,12 @@ class TrefleDAO (){
             val nazivBiljke = biljka.naziv
             val startIndex = nazivBiljke.indexOf("(") + 1
             val endIndex = nazivBiljke.indexOf(")")
-            val latinskiNaziv = nazivBiljke.substring(startIndex, endIndex).toLowerCase().replace(" ", "-")
+            var latinskiNaziv = nazivBiljke.substring(startIndex, endIndex).toLowerCase().replace(" ", "-")
 
             val response = apiService.getPlantById(latinskiNaziv)
             println("API response data: ${response.data}")
 
-            val plantData = response.data.firstOrNull()
+            val plantData = response.data
 
             if (plantData != null) {
                 if (plantData.family != biljka.porodica) {
@@ -143,21 +145,21 @@ class TrefleDAO (){
                     }
                 }
 
-                val toxicity = plantData.main_species?.specifications?.toxicity
+                val toxicity = plantData.specifications?.toxicity
                 if (toxicity != "none" && !biljka.medicinskoUpozorenje.contains("TOKSIČNO")) {
                     biljka.medicinskoUpozorenje += " TOKSIČNO"
                 } else if (toxicity == null) {
                     biljka.medicinskoUpozorenje += " TOKSIČNO"
                 }
 
-                val validSoilTextures = plantData.main_species?.specifications?.growth?.soil_texture ?: emptyList<String>()
+                val validSoilTextures = plantData.growth?.soil_texture ?: emptyList<String>()
                 val existingSoils = biljka.zemljisniTipovi.map { it.name }
                 val newSoils = validSoilTextures.filterNot { existingSoils.contains(it) }
                 val updatedSoils = biljka.zemljisniTipovi + newSoils.map { Zemljiste.valueOf(it) }
                 biljka.zemljisniTipovi = updatedSoils
 
-                val light = plantData.main_species?.specifications?.growth?.light ?: 0
-                val humidity = plantData.main_species?.specifications?.growth?.atmospheric_humidity ?: 0
+                val light = plantData.growth?.light ?: 0
+                val humidity = plantData.growth?.atmospheric_humidity ?: 0
                 val filteredClimateTypes = biljka.klimatskiTipovi.filter { climateType ->
                     light in climateType.light || humidity in climateType.atmospheric_humidity
                 }.toMutableList()
@@ -180,21 +182,20 @@ class TrefleDAO (){
     suspend fun getPlantsWithFlowerColor(flowerColor: String, substr: String): List<Biljka> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = apiService.getPlantsByFlowerColor(flowerColor)
+                val response = apiService.getPlantsByFlowerColor(flowerColor,substr)
 
                 val filteredPlants = response.data.filter { plant ->
                     val commonNameMatches = plant.common_name?.contains(substr, ignoreCase = true) ?: false
                     val scientificNameMatches = plant.scientific_name.contains(substr, ignoreCase = true)
                     println("Filtering plant: ${plant.scientific_name}, matches: $commonNameMatches matches2: $scientificNameMatches")
                     commonNameMatches || scientificNameMatches
-
                 }
 
                 val mappedPlants = filteredPlants.map { plantData ->
                     Biljka(
                         naziv = plantData.scientific_name,
                         porodica = plantData.family ?: "",
-                        medicinskoUpozorenje = plantData.main_species?.specifications?.toxicity?.let {
+                        medicinskoUpozorenje = plantData.specifications?.toxicity?.let {
                             if (it != "none") "TOKSIČNO" else ""
                         } ?: "",
                         medicinskeKoristi = emptyList(),
