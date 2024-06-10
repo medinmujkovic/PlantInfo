@@ -99,20 +99,7 @@ class MainActivity : AppCompatActivity() {
             if (query.isNotEmpty() && colors.contains(selectedColor)) {
                 GlobalScope.launch(Dispatchers.Main) {
                     try {
-//                        var fixed = TrefleDAO().fixData(
-//                            Biljka(
-//                                naziv = "Bosiljak (Ocimum basilicum)",
-//                                porodica = "Netacno (usnate)",
-//                                medicinskoUpozorenje = "Može iritati kožu osjetljivu na sunce. Preporučuje se oprezna upotreba pri korištenju ulja bosiljka.",
-//                                medicinskeKoristi = listOf(
-//                                    MedicinskaKorist.SMIRENJE,
-//                                    MedicinskaKorist.REGULACIJAPROBAVE
-//                                ),
-//                                profilOkusa = ProfilOkusaBiljke.BEZUKUSNO,
-//                                jela = listOf("Salata od paradajza", "Punjene tikvice"),
-//                                klimatskiTipovi = listOf(KlimatskiTip.SREDOZEMNA, KlimatskiTip.SUBTROPSKA),
-//                                zemljisniTipovi = listOf(Zemljiste.PJESKOVITO, Zemljiste.ILOVACA),
-//                            ))
+
                         val plants = trefleDAO.getPlantsWithFlowerColor(selectedColor, query)
                         botanickiAdapter.updateBiljke(plants)
                     } catch (e: Exception) {
