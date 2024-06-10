@@ -46,10 +46,10 @@ class TrefleDAO (){
     }
 
     interface TrefleApiService {
-        @GET("plants")
+        @GET("species/search")
         suspend fun getPlantsByFlowerColor(
             @Query("filter[flower_color]") flowerColor: String,
-            @Query("q") substr: String,
+            @Query("q") query: String,
             @Query("token") apiKey: String = "WRsQtW2Qqa4PJm0-TE1QsLYxKqWFa286xG-tj-WdKL0"
         ): TrefleResponse
 
