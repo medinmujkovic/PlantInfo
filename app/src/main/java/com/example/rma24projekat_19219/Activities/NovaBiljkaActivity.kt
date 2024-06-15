@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.Biljka
 import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.Trefle.TrefleDAO
+import com.example.rma24projekat_19219.DAO.TrefleDAO
 import com.example.rma24projekat_19219.Types.KlimatskiTip
 import com.example.rma24projekat_19219.Types.MedicinskaKorist
 import com.example.rma24projekat_19219.Types.ProfilOkusaBiljke

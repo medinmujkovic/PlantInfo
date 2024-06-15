@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.glide)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
     androidTestImplementation("org.testng:testng:6.9.6")
     annotationProcessor(libs.compiler)
     testImplementation("org.json:json:20140107")
@@ -59,8 +61,8 @@ dependencies {
     testImplementation ("org.mockito:mockito-core:4.0.0")
     testImplementation ("androidx.test:core:1.4.0")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
-
-
-
+    implementation("androidx.room:room-runtime:+")
+    annotationProcessor("androidx.room:room-compiler:+")
+    implementation("androidx.room:room-ktx:+")
 
 }

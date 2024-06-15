@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.Biljka
 import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.Trefle.TrefleDAO
+import com.example.rma24projekat_19219.DAO.TrefleDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
