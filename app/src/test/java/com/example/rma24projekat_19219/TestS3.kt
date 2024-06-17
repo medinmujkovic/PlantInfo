@@ -1,6 +1,6 @@
 package com.example.rma24projekat_19219
 
-import com.example.rma24projekat_19219.DAO.TrefleDAO
+import com.example.rma24projekat_19219.DAO.API.TrefleDAO
 import com.example.rma24projekat_19219.Types.KlimatskiTip
 import com.example.rma24projekat_19219.Types.MedicinskaKorist
 import com.example.rma24projekat_19219.Types.ProfilOkusaBiljke
@@ -22,8 +22,7 @@ class TestS3 {
     @Test
     fun fixBosiljakTest() = runBlocking{
         var fixed = TrefleDAO().fixData(
-            Biljka(
-            naziv = "Bosiljak (Ocimum basilicum)",
+            Biljka(naziv = "Bosiljak (Ocimum basilicum)",
             porodica = "Netacno (usnate)",
             medicinskoUpozorenje = "Može iritati kožu osjetljivu na sunce. Preporučuje se oprezna upotreba pri korištenju ulja bosiljka.",
             medicinskeKoristi = listOf(

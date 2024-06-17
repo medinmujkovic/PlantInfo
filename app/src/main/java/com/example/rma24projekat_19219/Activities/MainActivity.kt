@@ -16,7 +16,7 @@ import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterBotanicki
 import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterKuharski
 import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterMedicinski
 import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.DAO.TrefleDAO
+import com.example.rma24projekat_19219.DAO.API.TrefleDAO
 import com.example.rma24projekat_19219.biljke
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

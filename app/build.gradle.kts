@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-kapt")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -51,6 +53,7 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.junit.ktx)
     androidTestImplementation("org.testng:testng:6.9.6")
     annotationProcessor(libs.compiler)
     testImplementation("org.json:json:20140107")
@@ -61,8 +64,12 @@ dependencies {
     testImplementation ("org.mockito:mockito-core:4.0.0")
     testImplementation ("androidx.test:core:1.4.0")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
-    implementation("androidx.room:room-runtime:+")
-    annotationProcessor("androidx.room:room-compiler:+")
-    implementation("androidx.room:room-ktx:+")
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+//    ksp("androidx.room:room-compiler:2.6.1")
+    androidTestImplementation ("androidx.test:rules:1.4.0")
+
 
 }

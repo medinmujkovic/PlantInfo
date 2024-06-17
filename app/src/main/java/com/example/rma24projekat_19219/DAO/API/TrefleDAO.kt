@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.DAO
+package com.example.rma24projekat_19219.DAO.API
 
 
 import android.content.Context
@@ -13,9 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -45,44 +42,6 @@ class TrefleDAO (){
             ?: Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
     }
 
-    interface TrefleApiService {
-        @GET("species/search")
-        suspend fun getPlantsByFlowerColor(
-            @Query("filter[flower_color]") flowerColor: String,
-            @Query("q") query: String,
-            @Query("token") apiKey: String = "WRsQtW2Qqa4PJm0-TE1QsLYxKqWFa286xG-tj-WdKL0"
-        ): TrefleResponse
-
-        @GET("species/{id}")
-        suspend fun getPlantById(
-            @Path("id") id: String,
-            @Query("token") apiKey: String = "WRsQtW2Qqa4PJm0-TE1QsLYxKqWFa286xG-tj-WdKL0"
-        ): TrefleResponse2
-    }
-    data class TrefleResponse2(
-        val data: PlantData
-    )
-    data class TrefleResponse(
-        val data: List<PlantData>
-    )
-    data class PlantData(
-        val id: Int,
-        val common_name: String?,
-        val scientific_name: String,
-        val family: String?,
-        val edible: Boolean,
-        val image_url: String?,
-        val specifications: Specifications?,
-        val growth: Growth?
-    )
-    data class Specifications(
-        val toxicity: String?,
-    )
-    data class Growth(
-        val soil_texture: List<String>?,
-        val light: Int?,
-        val atmospheric_humidity: Int?
-    )
 
     private val apiService: TrefleApiService = retrofit.create(TrefleApiService::class.java)
 

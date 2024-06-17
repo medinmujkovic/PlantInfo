@@ -15,8 +15,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.Biljka
+import com.example.rma24projekat_19219.DAO.API.TrefleDAO
 import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.DAO.TrefleDAO
 import com.example.rma24projekat_19219.Types.KlimatskiTip
 import com.example.rma24projekat_19219.Types.MedicinskaKorist
 import com.example.rma24projekat_19219.Types.ProfilOkusaBiljke
@@ -160,7 +160,15 @@ class NovaBiljkaActivity : AppCompatActivity() {
 
             if (validateFields(naziv, porodica, medicinskoUpozorenje, medicinskaKoristt,
                     odabraniProfilOkusa,jelaa,klimatskiTipp,zemljisniTipp)) {
-                val novaBiljka = Biljka(naziv, porodica, medicinskoUpozorenje, medicinskaKoristt, odabraniProfilOkusa,jelaa,klimatskiTipp,zemljisniTipp)
+                val novaBiljka = Biljka(
+                    naziv=naziv,
+                    porodica=porodica,
+                    medicinskoUpozorenje=medicinskoUpozorenje,
+                    medicinskeKoristi = medicinskaKoristt,
+                    profilOkusa = odabraniProfilOkusa,
+                    jela=jelaa,
+                    klimatskiTipovi = klimatskiTipp,
+                    zemljisniTipovi = zemljisniTipp)
                 biljke.add(novaBiljka)
                 recyclerView.adapter?.notifyItemInserted(biljke.size - 1)
                 recyclerView.scrollToPosition(biljke.size - 1)
