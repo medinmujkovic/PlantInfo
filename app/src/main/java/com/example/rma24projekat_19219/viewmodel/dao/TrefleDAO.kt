@@ -160,7 +160,7 @@ class TrefleDAO (){
                         } ?: "",
                         medicinskeKoristi = emptyList(),
                         profilOkusa = ProfilOkusaBiljke.BEZUKUSNO,
-                        jela = if (plantData.edible) listOf() else emptyList(),
+                        jela = if (plantData.edible == true) listOf() else emptyList(),
                         klimatskiTipovi = emptyList(),
                         zemljisniTipovi = mutableListOf()
                     )
