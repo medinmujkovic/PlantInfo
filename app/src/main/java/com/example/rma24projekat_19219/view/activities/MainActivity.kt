@@ -12,12 +12,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rma24projekat_19219.R
+import com.example.rma24projekat_19219.models.biljke
 import com.example.rma24projekat_19219.view.adapters.RecyclerViewAdapterBotanicki
 import com.example.rma24projekat_19219.view.adapters.RecyclerViewAdapterKuharski
 import com.example.rma24projekat_19219.view.adapters.RecyclerViewAdapterMedicinski
-import com.example.rma24projekat_19219.R
 import com.example.rma24projekat_19219.viewmodel.dao.TrefleDAO
-import com.example.rma24projekat_19219.models.biljke
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -98,11 +98,9 @@ class MainActivity : AppCompatActivity() {
             if (query.isNotEmpty() && colors.contains(selectedColor)) {
                 GlobalScope.launch(Dispatchers.Main) {
                     try {
-
                         val plants = trefleDAO.getPlantsWithFlowerColor(selectedColor, query)
                         botanickiAdapter.updateBiljke(plants)
                     } catch (e: Exception) {
-                        // Handle exception
                     }
                 }
             }
