@@ -98,12 +98,19 @@ class MainActivity : AppCompatActivity() {
             if (query.isNotEmpty() && colors.contains(selectedColor)) {
                 GlobalScope.launch(Dispatchers.Main) {
                     try {
-                        val plants = trefleDAO.getPlantsWithFlowerColor(selectedColor, query)
-                        botanickiAdapter.updateBiljke(plants)
+                        val botanicalPlants = trefleDAO.getPlantsWithFlowerColor(selectedColor, query)
+                        val medicalPlants = trefleDAO.getPlantsWithFlowerColor(selectedColor, query)
+                        val culinaryPlants = trefleDAO.getPlantsWithFlowerColor(selectedColor, query)
+
+                        botanickiAdapter.updateBiljkeBotanicki(botanicalPlants)
+                        medicinskiAdapter.updateBiljkeMedicinske(medicalPlants)
+                        kuharskiAdapter.updateBiljkeKuharski(culinaryPlants)
                     } catch (e: Exception) {
+
                     }
                 }
             }
         }
     }
+
 }

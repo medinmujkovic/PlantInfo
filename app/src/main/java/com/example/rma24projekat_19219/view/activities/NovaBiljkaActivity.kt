@@ -14,13 +14,13 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rma24projekat_19219.models.Biljka
-import com.example.rma24projekat_19219.viewmodel.dao.TrefleDAO
 import com.example.rma24projekat_19219.R
+import com.example.rma24projekat_19219.models.Biljka
 import com.example.rma24projekat_19219.models.types.KlimatskiTip
 import com.example.rma24projekat_19219.models.types.MedicinskaKorist
 import com.example.rma24projekat_19219.models.types.ProfilOkusaBiljke
 import com.example.rma24projekat_19219.models.types.Zemljiste
+import com.example.rma24projekat_19219.viewmodel.dao.TrefleDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -185,6 +185,9 @@ class NovaBiljkaActivity : AppCompatActivity() {
                     val ispravljenaBiljka = trefleDAO.fixData(novaBiljka)
                     withContext(Dispatchers.Main) {
                         biljke.add(ispravljenaBiljka)
+                        recyclerView.adapter?.notifyItemInserted(biljke.size - 1)
+                        recyclerView.scrollToPosition(biljke.size - 1)
+                        adapter.notifyDataSetChanged()
                     }
                 }
             }

@@ -8,8 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.viewmodel.dao.TrefleDAO
 import com.example.rma24projekat_19219.models.Biljka
+import com.example.rma24projekat_19219.viewmodel.dao.TrefleDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -71,7 +71,7 @@ class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
             val lista = mutableListOf<Biljka>()
             val selectedBiljka = biljke.getOrNull(position)
             if (selectedBiljka == null) {
-                updateBiljke(biljke)
+                updateBiljkeKuharski(biljke)
                 return@setOnClickListener
             }
 
@@ -99,10 +99,10 @@ class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
                     }
                 }
             }
-            updateBiljke(lista)
+            updateBiljkeKuharski(lista)
         }
     }
-    fun updateBiljke (biljke: List<Biljka>) {
+    fun updateBiljkeKuharski (biljke: List<Biljka>) {
         this.biljke = biljke
         notifyDataSetChanged()
     }

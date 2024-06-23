@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rma24projekat_19219.R
 import com.example.rma24projekat_19219.models.Biljka
 import com.example.rma24projekat_19219.viewmodel.dao.TrefleDAO
-import com.example.rma24projekat_19219.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -38,7 +38,6 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) :
                 val image = trefleDAO.getImage(currentBiljka)
                 holder.slikaItem.setImageBitmap(image)
             } catch (e: Exception) {
-                // Handle exception, e.g., set a placeholder image
                 holder.slikaItem.setImageResource(R.drawable.ic_launcher_background)
             }
         }
@@ -58,7 +57,7 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) :
         holder.itemView.setOnClickListener {
             val selectedBiljka = biljke.getOrNull(position)
             if (selectedBiljka == null) {
-                updateBiljke(biljke)
+                updateBiljkeMedicinske(biljke)
                 return@setOnClickListener
             }
 
@@ -73,13 +72,13 @@ class RecyclerViewAdapterMedicinski(private var biljke: List<Biljka>) :
                     lista.add(biljka)
                 }
             }
-            updateBiljke(lista)
+            updateBiljkeMedicinske(lista)
         }
 
 
     }
 
-    fun updateBiljke(biljke: List<Biljka>) {
+    fun updateBiljkeMedicinske(biljke: List<Biljka>) {
         this.biljke = biljke
         notifyDataSetChanged()
     }
