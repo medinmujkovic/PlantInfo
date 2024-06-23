@@ -107,11 +107,4 @@ interface BiljkaDAO {
     @Query("SELECT * FROM BiljkaBitmap WHERE idBiljke = :idBiljke")
     suspend fun getBiljkaBitmapById(idBiljke: Long): BiljkaBitmap?
 
-//    @Query("SELECT * FROM Biljka WHERE id = :idBiljke")
-//    suspend fun getBiljkaById(idBiljke: Long): Biljka?
-//
-//    @Query("SELECT * FROM BiljkaBitmap WHERE idBiljke = :idBiljke")
-//    suspend fun getBiljkaBitmapById(idBiljke: Long): BiljkaBitmap?
-
-
 }
