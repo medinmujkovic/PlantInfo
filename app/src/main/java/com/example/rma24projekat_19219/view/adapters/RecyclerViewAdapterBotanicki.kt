@@ -45,11 +45,11 @@ class RecyclerViewAdapterBotanicki(private var biljke: List<Biljka>)
 
         val porodica: String? = biljke[position].porodica
 
-//        var id: Int = context.resources
-//            .getIdentifier(porodica, "drawable", context.packageName)
-//        if (id==0) id=context.resources
-//            .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
-//        holder.slikaItem.setImageResource(id)
+        var id: Int = context.resources
+            .getIdentifier(porodica, "drawable", context.packageName)
+        if (id==0) id=context.resources
+            .getIdentifier(R.drawable.ic_launcher_background.toString(), "drawable", context.packageName)
+        holder.slikaItem.setImageResource(id)
 
         holder.itemView.setOnClickListener{
             val lista= mutableListOf<Biljka>()

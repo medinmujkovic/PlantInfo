@@ -86,6 +86,10 @@ class MainActivity : AppCompatActivity() {
         resetBtn.setOnClickListener {
             pretragaET.text.clear()
             bojaSPIN.setSelection(0)
+            botanickiAdapter.updateBiljkeBotanicki(biljke)
+            medicinskiAdapter.updateBiljkeMedicinske(biljke)
+            kuharskiAdapter.updateBiljkeKuharski(biljke)
+
         }
         val colors = listOf("red", "blue", "yellow", "orange", "purple", "brown", "green")
         val colorAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, colors)
