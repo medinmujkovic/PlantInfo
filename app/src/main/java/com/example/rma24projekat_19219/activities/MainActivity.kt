@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.Activities
+package com.example.rma24projekat_19219.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,12 +12,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterBotanicki
-import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterKuharski
-import com.example.rma24projekat_19219.Adapters.RecyclerViewAdapterMedicinski
+import com.example.rma24projekat_19219.adapters.RecyclerViewAdapterBotanicki
+import com.example.rma24projekat_19219.adapters.RecyclerViewAdapterKuharski
+import com.example.rma24projekat_19219.adapters.RecyclerViewAdapterMedicinski
 import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.DAO.API.TrefleDAO
-import com.example.rma24projekat_19219.biljke
+import com.example.rma24projekat_19219.data.dao.TrefleDAO
+import com.example.rma24projekat_19219.data.models.biljke
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.Types
+package com.example.rma24projekat_19219.data.models.types
 enum class KlimatskiTip(val opis: String, val light: IntRange, val atmospheric_humidity: IntRange) {
     SREDOZEMNA("Mediteranska klima - suha, topla ljeta i blage zime",6..9, 1..5),
     TROPSKA( "Tropska klima - topla i vlažna tokom cijele godine",8..10, 7..10),

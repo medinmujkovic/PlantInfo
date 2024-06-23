@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.Activities
+package com.example.rma24projekat_19219.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -14,13 +14,13 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rma24projekat_19219.Biljka
-import com.example.rma24projekat_19219.DAO.API.TrefleDAO
+import com.example.rma24projekat_19219.data.models.Biljka
+import com.example.rma24projekat_19219.data.dao.TrefleDAO
 import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.Types.KlimatskiTip
-import com.example.rma24projekat_19219.Types.MedicinskaKorist
-import com.example.rma24projekat_19219.Types.ProfilOkusaBiljke
-import com.example.rma24projekat_19219.Types.Zemljiste
+import com.example.rma24projekat_19219.data.models.types.KlimatskiTip
+import com.example.rma24projekat_19219.data.models.types.MedicinskaKorist
+import com.example.rma24projekat_19219.data.models.types.ProfilOkusaBiljke
+import com.example.rma24projekat_19219.data.models.types.Zemljiste
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.Types
+package com.example.rma24projekat_19219.data.models.types
 
 enum class MedicinskaKorist(val opis: String) {
     SMIRENJE("Smirenje - za smirenje i relaksaciju"),

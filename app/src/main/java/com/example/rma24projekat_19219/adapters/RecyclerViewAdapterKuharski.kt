@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.Adapters
+package com.example.rma24projekat_19219.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rma24projekat_19219.Biljka
-import com.example.rma24projekat_19219.DAO.API.TrefleDAO
 import com.example.rma24projekat_19219.R
+import com.example.rma24projekat_19219.data.dao.TrefleDAO
+import com.example.rma24projekat_19219.data.models.Biljka
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -38,7 +38,7 @@ class RecyclerViewAdapterKuharski(private var biljke: List<Biljka>)
         }
 
         holder.nazivItem.text = biljke[position].naziv;
-        holder.profilOkusaItem.text = biljke[position].profilOkusa.opis
+        holder.profilOkusaItem.text = biljke[position].profilOkusa!!.opis
         val jelaList = biljke[position].jela
         try {
             val jelo1Item = jelaList[0]

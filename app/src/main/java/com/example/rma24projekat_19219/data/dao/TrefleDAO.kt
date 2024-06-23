@@ -1,14 +1,15 @@
-package com.example.rma24projekat_19219.DAO.API
+package com.example.rma24projekat_19219.data.dao
 
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.example.rma24projekat_19219.Biljka
 import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.Types.KlimatskiTip
-import com.example.rma24projekat_19219.Types.ProfilOkusaBiljke
-import com.example.rma24projekat_19219.Types.Zemljiste
+import com.example.rma24projekat_19219.data.api.TrefleApiService
+import com.example.rma24projekat_19219.data.models.Biljka
+import com.example.rma24projekat_19219.data.models.types.KlimatskiTip
+import com.example.rma24projekat_19219.data.models.types.ProfilOkusaBiljke
+import com.example.rma24projekat_19219.data.models.types.Zemljiste
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
@@ -21,7 +22,7 @@ import java.net.URL
 class TrefleDAO (){
 
     private lateinit var context: Context
-    private val baseUrl = "https://trefle.io/api/v1/"
+    private val baseUrl = "http://trefle.io/api/v1/"
     private val defaultBitmap: Bitmap by lazy {
         createDefaultBitmap()
     }
