@@ -1,7 +1,7 @@
-package com.example.rma24projekat_19219.data.models.convert
+package com.example.rma24projekat_19219.viewmodel.convert
 
 import androidx.room.TypeConverter
-import com.example.rma24projekat_19219.data.models.types.KlimatskiTip
+import com.example.rma24projekat_19219.models.types.KlimatskiTip
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type

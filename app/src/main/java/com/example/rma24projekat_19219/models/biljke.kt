@@ -1,10 +1,10 @@
-package com.example.rma24projekat_19219.data.models
+package com.example.rma24projekat_19219.models
 
-import com.example.rma24projekat_19219.data.models.types.KlimatskiTip
-import com.example.rma24projekat_19219.data.models.types.MedicinskaKorist
-import com.example.rma24projekat_19219.data.models.types.ProfilOkusaBiljke
-import com.example.rma24projekat_19219.data.models.types.Zemljiste
-import com.example.rma24projekat_19219.data.models.types.Zemljište
+import com.example.rma24projekat_19219.models.types.KlimatskiTip
+import com.example.rma24projekat_19219.models.types.MedicinskaKorist
+import com.example.rma24projekat_19219.models.types.ProfilOkusaBiljke
+import com.example.rma24projekat_19219.models.types.Zemljiste
+import com.example.rma24projekat_19219.models.types.Zemljište
 
 val biljke = listOf(
     Biljka(

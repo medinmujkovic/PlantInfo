@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.data.dao
+package com.example.rma24projekat_19219.viewmodel.dao
 
 
 import android.graphics.Bitmap
@@ -8,8 +8,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.example.rma24projekat_19219.data.models.Biljka
-import com.example.rma24projekat_19219.data.models.BiljkaBitmap
+import com.example.rma24projekat_19219.models.Biljka
+import com.example.rma24projekat_19219.models.BiljkaBitmap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

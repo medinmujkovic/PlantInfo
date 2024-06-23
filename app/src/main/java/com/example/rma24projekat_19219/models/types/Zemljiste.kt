@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.data.models.types
+package com.example.rma24projekat_19219.models.types
 
 typealias Zemljište = Zemljiste
 

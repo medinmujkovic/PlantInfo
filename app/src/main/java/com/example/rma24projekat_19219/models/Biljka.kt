@@ -1,19 +1,19 @@
-package com.example.rma24projekat_19219.data.models
+package com.example.rma24projekat_19219.models
 
 import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.rma24projekat_19219.data.models.convert.ConvertBitmap
-import com.example.rma24projekat_19219.data.models.convert.ListKlimatskiTipConverter
-import com.example.rma24projekat_19219.data.models.convert.ListMedicinskaKoristConverter
-import com.example.rma24projekat_19219.data.models.convert.ListStringConverter
-import com.example.rma24projekat_19219.data.models.convert.ListZemljisteConverter
-import com.example.rma24projekat_19219.data.models.types.KlimatskiTip
-import com.example.rma24projekat_19219.data.models.types.MedicinskaKorist
-import com.example.rma24projekat_19219.data.models.types.ProfilOkusaBiljke
-import com.example.rma24projekat_19219.data.models.types.Zemljiste
+import com.example.rma24projekat_19219.models.types.KlimatskiTip
+import com.example.rma24projekat_19219.models.types.MedicinskaKorist
+import com.example.rma24projekat_19219.models.types.ProfilOkusaBiljke
+import com.example.rma24projekat_19219.models.types.Zemljiste
+import com.example.rma24projekat_19219.viewmodel.convert.ConvertBitmap
+import com.example.rma24projekat_19219.viewmodel.convert.ListKlimatskiTipConverter
+import com.example.rma24projekat_19219.viewmodel.convert.ListMedicinskaKoristConverter
+import com.example.rma24projekat_19219.viewmodel.convert.ListStringConverter
+import com.example.rma24projekat_19219.viewmodel.convert.ListZemljisteConverter
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "Biljka")
@@ -24,7 +24,6 @@ data class Biljka(
     @ColumnInfo(name = "family") @SerializedName("family") var porodica: String,
     @ColumnInfo(name = "medicinskoUpozorenje") @SerializedName("medicinskoUpozorenje") var medicinskoUpozorenje: String,
     @ColumnInfo(name = "profilOkusa") @SerializedName("profilOkusa") val profilOkusa: ProfilOkusaBiljke?,
-
     @TypeConverters(ListStringConverter::class)
     @ColumnInfo(name = "jela") @SerializedName("jela") var jela: List<String>,
     @TypeConverters(ListKlimatskiTipConverter::class)

@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.data.api
+package com.example.rma24projekat_19219.viewmodel.api
 
 data class TrefleResponse2(
     val data: PlantData

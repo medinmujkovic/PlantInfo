@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.adapters
+package com.example.rma24projekat_19219.view.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rma24projekat_19219.data.models.Biljka
-import com.example.rma24projekat_19219.data.dao.TrefleDAO
+import com.example.rma24projekat_19219.models.Biljka
+import com.example.rma24projekat_19219.viewmodel.dao.TrefleDAO
 import com.example.rma24projekat_19219.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
