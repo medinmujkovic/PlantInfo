@@ -98,7 +98,7 @@ class TrefleDAO (){
                     biljka.porodica = plantData.family ?: ""
                 }
 
-                if (!plantData.edible) {
+                if (!plantData.edible!!) {
                     biljka.jela = emptyList()
                     if (!biljka.medicinskoUpozorenje.contains("NIJE JESTIVO")) {
                         biljka.medicinskoUpozorenje += " NIJE JESTIVO"
