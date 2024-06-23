@@ -9,11 +9,11 @@ import com.example.rma24projekat_19219.models.types.KlimatskiTip
 import com.example.rma24projekat_19219.models.types.MedicinskaKorist
 import com.example.rma24projekat_19219.models.types.ProfilOkusaBiljke
 import com.example.rma24projekat_19219.models.types.Zemljiste
-import com.example.rma24projekat_19219.viewmodel.convert.ConvertBitmap
-import com.example.rma24projekat_19219.viewmodel.convert.ListKlimatskiTipConverter
-import com.example.rma24projekat_19219.viewmodel.convert.ListMedicinskaKoristConverter
-import com.example.rma24projekat_19219.viewmodel.convert.ListStringConverter
-import com.example.rma24projekat_19219.viewmodel.convert.ListZemljisteConverter
+import com.example.rma24projekat_19219.viewmodel.convertors.ConvertBitmap
+import com.example.rma24projekat_19219.viewmodel.convertors.ListKlimatskiTipConverter
+import com.example.rma24projekat_19219.viewmodel.convertors.ListMedicinskaKoristConverter
+import com.example.rma24projekat_19219.viewmodel.convertors.ListStringConverter
+import com.example.rma24projekat_19219.viewmodel.convertors.ListZemljisteConverter
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "Biljka")

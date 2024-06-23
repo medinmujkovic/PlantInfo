@@ -12,7 +12,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.rma24projekat_19219.view.activities.MainActivity
 import com.example.rma24projekat_19219.viewmodel.dao.BiljkaDAO
-import com.example.rma24projekat_19219.viewmodel.dao.BiljkaRepository
+import com.example.rma24projekat_19219.viewmodel.repository.BiljkaDatabase
 import com.example.rma24projekat_19219.models.Biljka
 import com.example.rma24projekat_19219.models.types.KlimatskiTip
 import com.example.rma24projekat_19219.models.types.MedicinskaKorist
@@ -59,7 +59,7 @@ class BiljkeDB4test {
     companion object {
         lateinit var db: SupportSQLiteDatabase
         lateinit var context: Context
-        lateinit var roomDb: BiljkaRepository
+        lateinit var roomDb: BiljkaDatabase
         lateinit var biljkaDAO: BiljkaDAO
 
         @BeforeClass
@@ -67,7 +67,7 @@ class BiljkeDB4test {
         fun createDB() = runBlocking {
             val scenarioRule = ActivityScenario.launch(MainActivity::class.java)
             context = ApplicationProvider.getApplicationContext()
-            roomDb = Room.inMemoryDatabaseBuilder(context, BiljkaRepository::class.java).build()
+            roomDb = Room.inMemoryDatabaseBuilder(context, BiljkaDatabase::class.java).build()
             biljkaDAO = roomDb.biljkaDAO()
             biljkaDAO.getAllBiljkas()
             db = roomDb.openHelper.readableDatabase

@@ -1,11 +1,11 @@
 package com.example.rma24projekat_19219
 
-import com.example.rma24projekat_19219.viewmodel.dao.TrefleDAO
 import com.example.rma24projekat_19219.models.Biljka
 import com.example.rma24projekat_19219.models.types.KlimatskiTip
 import com.example.rma24projekat_19219.models.types.MedicinskaKorist
 import com.example.rma24projekat_19219.models.types.ProfilOkusaBiljke
 import com.example.rma24projekat_19219.models.types.Zemljiste
+import com.example.rma24projekat_19219.viewmodel.dao.TrefleDAO
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.JUnitSoftAssertions
 import org.junit.Assert.assertTrue

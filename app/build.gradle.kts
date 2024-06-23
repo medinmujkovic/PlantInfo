@@ -68,8 +68,12 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
-//    ksp("androidx.room:room-compiler:2.6.1")
     androidTestImplementation ("androidx.test:rules:1.4.0")
+    testImplementation ("androidx.room:room-testing:2.3.0")
+    androidTestImplementation ("androidx.test:runner:1.3.0")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.3.0")
+
+
 
 
 }

@@ -5,7 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.example.rma24projekat_19219.R
-import com.example.rma24projekat_19219.viewmodel.api.TrefleApiService
+import com.example.rma24projekat_19219.viewmodel.repository.api.TrefleApiService
 import com.example.rma24projekat_19219.models.Biljka
 import com.example.rma24projekat_19219.models.types.KlimatskiTip
 import com.example.rma24projekat_19219.models.types.ProfilOkusaBiljke

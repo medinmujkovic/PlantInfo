@@ -1,4 +1,4 @@
-package com.example.rma24projekat_19219.viewmodel.convert
+package com.example.rma24projekat_19219.viewmodel.convertors
 
 import androidx.room.TypeConverter
 import com.example.rma24projekat_19219.models.types.Zemljiste
